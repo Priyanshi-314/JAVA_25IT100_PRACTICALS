@@ -1,0 +1,1 @@
+public class Driver {public static void main(String[] args){Card[] cards={new Card("Ace","Spades"),new Card("King","Hearts"),new Card("Ace","Spades")};int size=0;for(Card c:cards){boolean duplicate=false;for(int i=0;i<size;i++)if(cards[i].equals(c))duplicate=true;if(duplicate){System.out.println("Duplicate found: "+c);break;}size++;}}}
