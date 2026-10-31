@@ -1,0 +1,3 @@
+import java.io.*;
+class StudentData implements Serializable {private static final long serialVersionUID=1L;String name;transient String temporaryNote;StudentData(String n,String note){name=n;temporaryNote=note;}public String toString(){return name+", note="+temporaryNote;}}
+public class SaveLoad {public static void main(String[] args)throws Exception{StudentData[] a={new StudentData("Riya","temporary"),new StudentData("Aman","not saved")};try(ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("students.dat"))){out.writeObject(a);}try(ObjectInputStream in=new ObjectInputStream(new FileInputStream("students.dat"))){StudentData[] b=(StudentData[])in.readObject();for(StudentData s:b)System.out.println(s);}}}
