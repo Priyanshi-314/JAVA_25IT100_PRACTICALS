@@ -1,0 +1,3 @@
+package packagedapp.service;
+import packagedapp.model.Task;import java.util.*;
+public class TaskService {private final List<Task> tasks=new ArrayList<>();public void add(String n){if(n==null||n.isBlank())throw new IllegalArgumentException("Task name required");tasks.add(new Task(n));}public List<Task> all(){return tasks;}public void save(java.nio.file.Path p)throws java.io.IOException{List<String> names=new ArrayList<>();for(Task t:tasks)names.add(t.getName());java.nio.file.Files.write(p,names);}public void load(java.nio.file.Path p)throws java.io.IOException{if(java.nio.file.Files.exists(p))for(String n:java.nio.file.Files.readAllLines(p))add(n);}}
