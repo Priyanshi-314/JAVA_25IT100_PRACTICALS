@@ -1,0 +1,4 @@
+import java.lang.annotation.*;import java.lang.reflect.*;
+@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.FIELD)@interface Column {String name();}
+class PersonRow {@Column(name="name") String name;@Column(name="age") int age;public String toString(){return name+" "+age;}}
+public class ColumnMapper {static <T>T populate(Class<T> type,String header,String row)throws Exception{String[] h=header.split(","),v=row.split(",");T obj=type.getDeclaredConstructor().newInstance();for(Field f:type.getDeclaredFields()){Column c=f.getAnnotation(Column.class);if(c==null)continue;int index=-1;for(int i=0;i<h.length;i++)if(h[i].trim().equals(c.name()))index=i;if(index<0||index>=v.length)continue;f.setAccessible(true);if(f.getType()==int.class)f.setInt(obj,Integer.parseInt(v[index].trim()));else f.set(obj,v[index].trim());}return obj;}public static void main(String[] args)throws Exception{System.out.println(populate(PersonRow.class,"age,name","20,Riya"));}}

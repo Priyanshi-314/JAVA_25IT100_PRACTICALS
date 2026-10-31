@@ -1,0 +1,5 @@
+import java.lang.annotation.*;import java.lang.reflect.*;import java.util.*;
+@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.FIELD)@interface NotBlank {}
+@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.FIELD)@interface MaxLength {int value();}
+class SignupForm {@NotBlank @MaxLength(20) String name;@NotBlank String email;SignupForm(String n,String e){name=n;email=e;}}
+public class FormValidator {static List<String> validate(Object obj)throws Exception{List<String> errors=new ArrayList<>();for(Field f:obj.getClass().getDeclaredFields()){f.setAccessible(true);Object v=f.get(obj);if(f.isAnnotationPresent(NotBlank.class)&&(v==null||v.toString().isBlank()))errors.add(f.getName()+" cannot be blank");if(f.isAnnotationPresent(MaxLength.class)&&v!=null&&v.toString().length()>f.getAnnotation(MaxLength.class).value())errors.add(f.getName()+" is too long");}return errors;}public static void main(String[] args)throws Exception{System.out.println(validate(new SignupForm("","verylongemail@example.com")));}}
