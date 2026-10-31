@@ -1,0 +1,3 @@
+import java.util.NoSuchElementException;
+class ArrayStack<T>{private Object[] data;private int top=0;ArrayStack(int capacity){data=new Object[capacity];}void push(T value){if(top==data.length)throw new IllegalStateException("Stack full");data[top++]=value;}@SuppressWarnings("unchecked") T pop(){if(top==0)throw new NoSuchElementException("Stack is empty");T value=(T)data[--top];data[top]=null;return value;}boolean isEmpty(){return top==0;}}
+public class GenericStack {public static void main(String[] args){ArrayStack<String> names=new ArrayStack<>(5);names.push("Riya");names.push("Aman");System.out.println(names.pop());ArrayStack<Integer> nums=new ArrayStack<>(5);nums.push(10);nums.push(20);System.out.println(nums.pop());System.out.println("Empty: "+nums.isEmpty());}}

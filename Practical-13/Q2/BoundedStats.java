@@ -1,0 +1,1 @@
+public class BoundedStats {static <N extends Number> double average(N[] values){if(values.length==0)return 0;double sum=0;for(N n:values)sum+=n.doubleValue();return sum/values.length;}public static void main(String[] args){System.out.println(average(new Integer[]{1,2,3}));System.out.println(average(new Double[]{2.5,3.5}));System.out.println(average(new Long[]{10L,20L}));}}
