@@ -1,0 +1,2 @@
+import java.util.*;
+public class Leaderboard {public static void main(String[] args){Map<String,Integer> scores=Map.of("Riya",95,"Aman",88,"Dev",95,"Neha",91,"Karan",75);int topN=3;List<Map.Entry<String,Integer>> list=new ArrayList<>(scores.entrySet());list.sort((a,b)->{int c=b.getValue().compareTo(a.getValue());return c!=0?c:a.getKey().compareTo(b.getKey());});for(int i=0;i<Math.min(topN,list.size());i++)System.out.println((i+1)+". "+list.get(i).getKey()+" - "+list.get(i).getValue());}}
